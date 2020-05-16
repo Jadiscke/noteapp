@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+textarea {
+  border-radius: 15px;
+  min-width: 250px;
+  min-height: 300px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+}
+.container {
+  padding: 5% 15%;
+  text-align: center;
+
+}
+
+.note {
+  padding: 5%;
+  line-height: 1.5;
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: 400;
+}
+.note-box{
+  display: block;
+  position: relative;
+  margin: 5% auto 5% auto;
+  min-width: 300  px;
+  max-width: 600px;
+  min-height: 400px;
+  border-radius: 15px;
+  border: 2px solid black;
+}
+
+.clock {
+  position: fixed;
+  top: 5px;
+  right: 50px;
+  font-size: 0.6rem;
+}
+
+.edit-box {
+  display: block;
+  position: relative;
+  margin: 10% auto 5% auto;
+}
+
+.edit {
+  border-radius: 10px;
+  padding: 1% 15px;
+  position:absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.submit-edit {
+  top:auto;
+  bottom: 10px;
+}

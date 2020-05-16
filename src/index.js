@@ -1,13 +1,105 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+
+
+class Clock extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {date: new Date()};
+  }
+  componentDidMount(){
+    this.timerID = setInterval ( ()=> this.tick(), 1000);
+  }
+  componentWillUnmount(){
+    clearInterval(this.timerID);
+  }
+  tick(){
+    this.setState({
+      date: new Date()
+    })
+  }
+  render(){return(
+    <div className="clock">
+      <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+    </div>
+  );
+}
+}
+
+let note = 'Please write an essay about your favorite DOM element.';
+class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: note
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+    note = this.state.value;
+  }
+
+  render() {
+    return (
+      <form className="edit-box">
+        <label>
+          <textarea value={this.state.value} onChange={this.handleChange} />
+        </label>
+      </form>
+    );
+  }
+}
+
+class NoteBox extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {editMode: true};
+      this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(){
+      this.setState(state =>({
+        editMode: !state.editMode
+      }));
+    }
+    render (){
+      return(
+        <div className="note-box" >
+          <button className="edit" onClick={this.handleClick}>
+            <p>{this.state.editMode ? "FINISH": "EDIT"}</p>
+          </button>
+          {this.state.editMode &&
+            <EssayForm />
+          }
+          {!this.state.editMode &&
+            <p className="note">{note}</p>
+          }
+
+        </div>
+      );
+    }
+}
+
+
+function App (props){
+  return (
+    <div className="container">
+      <Clock />
+      <h1>{props.name}</h1>
+      <NoteBox />
+
+    </div>
+  );
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+
+  <App name="Note App" />,
   document.getElementById('root')
 );
 
