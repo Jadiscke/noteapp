@@ -38,6 +38,7 @@ class EssayForm extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+
   }
 
   handleChange(event) {
@@ -45,9 +46,10 @@ class EssayForm extends React.Component {
     note = this.state.value;
   }
 
+
   render() {
     return (
-      <form className="edit-box">
+      <form className="edit-box" onSubmit={this.handleSubmit}>
         <label>
           <textarea value={this.state.value} onChange={this.handleChange} />
         </label>
@@ -59,26 +61,29 @@ class EssayForm extends React.Component {
 class NoteBox extends React.Component {
     constructor(props){
       super(props);
-      this.state = {editMode: true};
+      this.state = {editMode: false };
+      this.case = '';
       this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-      this.setState(state =>({
-        editMode: !state.editMode
-      }));
+      this.setState((state) =>(
+        {editMode: !state.editMode})
+      );
     }
+
     render (){
+
+      if (this.state.editMode){
+        this.case = <EssayForm />;
+      }else{
+        this.case = <p className="note">{note}</p>;
+      }
       return(
         <div className="note-box" >
-          <button className="edit" onClick={this.handleClick}>
+          <button type="button" className="edit" onClick={() => this.handleClick()}>
             <p>{this.state.editMode ? "FINISH": "EDIT"}</p>
           </button>
-          {this.state.editMode &&
-            <EssayForm />
-          }
-          {!this.state.editMode &&
-            <p className="note">{note}</p>
-          }
+          {this.case}
 
         </div>
       );
